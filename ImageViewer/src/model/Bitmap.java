@@ -22,5 +22,9 @@ public class Bitmap {
             return null;
         }
     }
+
+    public byte[] getByteArray() {
+        return byteArray;
+    }
    
 }
