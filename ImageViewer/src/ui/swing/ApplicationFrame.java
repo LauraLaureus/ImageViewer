@@ -17,13 +17,14 @@ public class ApplicationFrame extends JFrame {
             throws HeadlessException {
         super("Image Viewer");
         this.listeners = listeners;
+        this.imageViewer = imageViewer;
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(1024, 800);
         this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout());
         this.createComponents();
         this.setVisible(true);
-        this.imageViewer = imageViewer;
+        
     }
 
     private void createComponents() {
