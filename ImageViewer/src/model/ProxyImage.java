@@ -1,51 +1,31 @@
 package model;
 
-import persistence.ImageLoader;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
-public class ProxyImage extends Image
+
+public class ProxyImage 
 {
 
-    private final ImageLoader loader;
-
-    public ProxyImage(ImageLoader loader) {
-        this.loader = loader;
-    }
-    private Image next;
-    private Image prev;
-    private Image realImage;
+    private final String name;
+    private BufferedImage img;
     
-    @Override
-    public Bitmap getBitmap() {
-        checkLoaded();
-        return realImage.getBitmap();
+    public ProxyImage(String name) {
+        this.name = name;
     }
-
-   
     
-    @Override
-    public Image getNext() {
-        return next;
+    public BufferedImage getImage(){
+        if(img == null){
+            try {
+                this.img = ImageIO.read(new File(this.name));
+            } catch (IOException ex) {
+                Logger.getLogger(ProxyImage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return this.img;
     }
-
-    @Override
-    public Image getPrev() {
-        return prev;
-    }
-
-    @Override
-    public void setNext(Image image) {
-        this.next = image;
-    }
-
-    @Override
-    public void setPrev(Image image) {
-        this.prev = image;
-    }
-
-    private void checkLoaded() {
-        if(realImage != null) return;
-        realImage = loader.load();
-    }
-
-    
 }
