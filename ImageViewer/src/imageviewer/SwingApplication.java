@@ -12,23 +12,26 @@ import model.RealImage;
 import ui.swing.SwingImageViewerPanel;
 import java.awt.event.ActionListener;
 
+
+
 public class SwingApplication {
 
+    //FOR NEXT VERSIONS: seleccionar la carpeta desde donde queremos leer las imágenes.
     public static void main(String[] args) {
         new SwingApplication().execute();
     }
-
+   
+    
     private void execute() {
-        Image[] images = linkImages(createImages());
+        Image[] images = linkImages(createImages()); 
         ImageViewer viewer = createImageViewer(images[0]);
         createApplicationFrame(createCommands(viewer), (SwingImageViewerPanel) viewer);
     }
 
+    //FOR NEXT VERSIONS: array de imágenes que dependa del número de imágenes que tenga la carpeta
     private Image[] createImages() {
         Image[] images = new Image[6];
-        for (int i = 0; i < images.length; i++) {
-            images[i] = createImage(i);
-        }
+        for (int i = 0; i < images.length; i++) images[i] = createImage(i);
         return images;
     }
 
@@ -55,9 +58,7 @@ public class SwingApplication {
     }
 
     private ImageViewer createImageViewer(Image image) {
-        SwingImageViewerPanel viewer = new SwingImageViewerPanel();
-        viewer.setImage(image);
-        return viewer;
+        return new SwingImageViewerPanel(image);
     }
 
     private ApplicationFrame createApplicationFrame(ActionListener[] listeners, SwingImageViewerPanel viewer) {
@@ -65,9 +66,10 @@ public class SwingApplication {
     }
 
     private ActionListener[] createCommands(ImageViewer viewer) {
-        return new ActionListener[]{
+        return new ActionListener[] {
             new PrevImageCommand(viewer),
             new NextImageCommand(viewer)
         };
     }
+    
 }

@@ -1,47 +1,51 @@
 package ui.swing;
 
-import java.awt.Graphics;
+import model.Image;
+import ui.ImageViewer;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
-import model.Image;
-import ui.ImageViewer;
+import model.ProxyImage;
 
-public class SwingImageViewerPanel  extends JPanel implements ImageViewer {
+public class SwingImageViewerPanel extends JPanel implements ImageViewer {
 
-    private Image image; 
+    private Image image;
     private int offset;
     private int initialX;
-    
-    private BufferedImage currentBufferedImage;
-    private BufferedImage nextBufferedImage;
-    private BufferedImage prevBufferedImage;
+
+    private BufferedImage currentBurrefedImage;
+    private BufferedImage nextBurrefedImage;
+    private BufferedImage prevBurrefedImage;
 
     public SwingImageViewerPanel() {
         super();
         this.hookEvents();
     }
     
-    @Override
-    public void paint(Graphics graphics){
-    
-        if(image == null) return;
-        linkBufferedImages();
-        graphics.clearRect(0,0, this.getWidth(), this.getHeight());
-        graphics.drawImage(currentBufferedImage, offset, 0, null);
-        if(offset == 0) return;
-        if(offset < 0 ) graphics.drawImage(nextBufferedImage,
-                currentBufferedImage.getWidth() + offset,
-                0, null);
-        else graphics.drawImage(prevBufferedImage, offset - currentBufferedImage.getWidth(),
-        0, null);
+    public SwingImageViewerPanel(Image image) {
+        super();
+        this.hookEvents();
+        this.setImage(image);
     }
-    
+
+    @Override
+    public void paint(Graphics graphics) {
+        if (image == null) return;
+        linkBufferedImages();
+        graphics.clearRect(0, 0, this.getWidth(), this.getHeight());
+        graphics.drawImage(currentBurrefedImage, offset, 0, null);
+        if (offset == 0) return;
+        if (offset < 0) graphics.drawImage(nextBurrefedImage, currentBurrefedImage.getWidth() + offset, 0, null);
+        else graphics.drawImage(prevBurrefedImage, offset - currentBurrefedImage.getWidth(), 0, null);
+    }
+
     @Override
     public Image getImage() {
         return image;
@@ -61,66 +65,62 @@ public class SwingImageViewerPanel  extends JPanel implements ImageViewer {
     private void hookEvents() {
         this.hookMouseListener();
         this.hookMouseMotionListener();
-    
     }
 
     private void hookMouseListener() {
-        this.addMouseListener(new MouseListener(){
+        this.addMouseListener(new MouseListener() {
 
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(MouseEvent me) {
             }
 
             @Override
-            public void mousePressed(MouseEvent e) {
-                initialX = e.getX();
+            public void mousePressed(MouseEvent me) {
+                initialX = me.getX();
             }
 
             @Override
-            public void mouseReleased(MouseEvent e) {
-                System.out.println("released" + e.getX());
-                if(offset > currentBufferedImage.getWidth() /2)
+            public void mouseReleased(MouseEvent me) {
+                System.out.println("released" + me.getX());
+                if (offset > currentBurrefedImage.getWidth() / 2)
                     image = image.getPrev();
-                if(offset < -currentBufferedImage.getWidth() / 2)
+                if (offset < -currentBurrefedImage.getWidth() / 2)
                     image = image.getNext();
                 offset = 0;
                 repaint();
             }
 
             @Override
-            public void mouseEntered(MouseEvent e) {
+            public void mouseEntered(MouseEvent me) {
             }
 
             @Override
-            public void mouseExited(MouseEvent e) {
+            public void mouseExited(MouseEvent me) {
             }
-        
         });
     }
 
     private void hookMouseMotionListener() {
-
-        this.addMouseMotionListener(new MouseMotionListener(){
+        this.addMouseMotionListener(new MouseMotionListener() {
 
             @Override
-            public void mouseDragged(MouseEvent e) {
-                offset = e.getX() - initialX;
+            public void mouseDragged(MouseEvent me) {
+                offset = me.getX() - initialX;
+                repaint();
             }
 
             @Override
-            public void mouseMoved(MouseEvent e) {
+            public void mouseMoved(MouseEvent me) {
             }
         });
     }
 
     private void linkBufferedImages() {
-        try{
-            this.currentBufferedImage = ImageIO.read(new ByteArrayInputStream(image.getBitmap().getByteArray()));
-            this.nextBufferedImage = ImageIO.read(new ByteArrayInputStream(image.getNext().getBitmap().getByteArray()));
-            this.prevBufferedImage = ImageIO.read(new ByteArrayInputStream(image.getPrev().getBitmap().getByteArray()));
-        }catch(IOException ex){}
-        
+        try {
+            this.currentBurrefedImage = ImageIO.read(new ByteArrayInputStream(image.getBitmap().getByteArray()));
+            this.nextBurrefedImage = ImageIO.read((new ByteArrayInputStream(image.getNext().getBitmap().getByteArray())));
+            this.prevBurrefedImage = ImageIO.read((new ByteArrayInputStream(image.getPrev().getBitmap().getByteArray())));
+        } catch (IOException ex) {
+        }
     }
-
-    
 }
