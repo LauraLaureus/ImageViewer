@@ -1,6 +1,7 @@
 package ui.swing;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -17,6 +18,26 @@ public class SwingImagePanel extends JPanel implements Observer {
         this.daisyChain = daisyChain;
         this.daisyChain.hook((Observer)this);
         this.addWidgets();
+        this.addComponentListener(new ComponentListener() {
+
+            @Override
+            public void componentResized(ComponentEvent e) {
+                revalidate();
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) {
+            }
+
+            @Override
+            public void componentShown(ComponentEvent e) {
+            }
+
+            @Override
+            public void componentHidden(ComponentEvent e) {
+            }
+        });
+        
     }
 
     @Override
@@ -34,6 +55,9 @@ public class SwingImagePanel extends JPanel implements Observer {
         return new JPanel(){
             {
                 this.addComponentListener(createComponentListener());
+                BufferedImage current = daisyChain.getCurrent();
+                this.setMinimumSize( new Dimension(current.getWidth(),
+                                                    current.getHeight()));
             }
             
             @Override
@@ -42,7 +66,7 @@ public class SwingImagePanel extends JPanel implements Observer {
                 BufferedImage current = daisyChain.getCurrent();
                 int w = current.getWidth();
                 int h = current.getHeight();
-                g.drawImage(current, 0, 0, getWidth(), getHeight(), null);
+                g.drawImage(current, 0, 0, this.getWidth(), this.getHeight(), null);
                 g.setColor(Color.red);
                 g.drawLine(w/3, 0, w/3, h);
                 g.drawLine(2*w/3, 0, 2*w/3, h);
