@@ -42,7 +42,8 @@ public class ImagePanel extends JPanel implements Observer{
     public void notice(Observed o) {
         ImageDaisyChain dc = (ImageDaisyChain) o;
         image = dc.getCurrent();
-        revalidate();
+        remove(0);
+        
     }
     
    

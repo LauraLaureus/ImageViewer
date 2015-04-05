@@ -1,19 +1,24 @@
 package controller;
 
-import ui.ImageViewer;
 import java.awt.event.ActionEvent;
+import persistence.ImageDaisyChain;
+import ui.swing.ApplicationFrame;
 
 public class NextImageCommand implements Command {
 
-    private final ImageViewer viewer;
-
-    public NextImageCommand(ImageViewer viewer) {
-        this.viewer = viewer;
+    private final ImageDaisyChain viewer;
+    private final ApplicationFrame parent;
+    
+    public NextImageCommand(ImageDaisyChain dc, ApplicationFrame af) {
+        this.viewer = dc;
+        parent = af;
     }
 
     @Override
     public void execute() {
-        this.viewer.setImage(this.viewer.getImage().getNext());
+        this.viewer.getNext();
+        this.parent.repaint();
+        this.parent.setVisible(true);
     }
 
     @Override

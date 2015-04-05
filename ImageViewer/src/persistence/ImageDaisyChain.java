@@ -14,7 +14,7 @@ import model.ProxyImage;
 public class ImageDaisyChain extends TreeMap<File,ProxyImage> implements Observed {
 
     private final ArrayList<Entry<File,ProxyImage>> daisyChain;
-    private Integer index;
+    private int index;
     private final ArrayList<Observer> obsevers;
     
     public ImageDaisyChain(File directory) {
