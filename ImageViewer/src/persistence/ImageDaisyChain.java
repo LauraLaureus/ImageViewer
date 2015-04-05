@@ -84,7 +84,7 @@ public class ImageDaisyChain extends TreeMap<File,ProxyImage> implements Observe
     @Override
     public void talk() {
         for (Observer obsever : obsevers) {
-            obsever.notice();
+            obsever.notice(this);
         }
     }
 }

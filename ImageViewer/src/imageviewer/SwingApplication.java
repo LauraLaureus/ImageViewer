@@ -4,11 +4,6 @@ import javax.swing.JFrame;
 import persistence.DirectoryFileChooser;
 import persistence.ImageDaisyChain;
 import ui.swing.ApplicationFrame;
-import ui.swing.SwingImagePanel;
-
-
-
-
 
 public class SwingApplication {
 
