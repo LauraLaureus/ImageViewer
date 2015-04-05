@@ -1,19 +1,23 @@
 package controller;
 
-import ui.ImageViewer;
 import java.awt.event.ActionEvent;
+import persistence.ImageDaisyChain;
+import ui.swing.ApplicationFrame;
 
 public class PrevImageCommand implements Command {
 
-    private final ImageViewer viewer;
-
-    public PrevImageCommand(ImageViewer viewer) {
-        this.viewer = viewer;
+    private final ImageDaisyChain viewer;
+    private final ApplicationFrame parent;
+    
+    public PrevImageCommand(ImageDaisyChain dc, ApplicationFrame af) {
+        this.viewer = dc;
+        parent = af;
     }
 
     @Override
     public void execute() {
-        this.viewer.setImage(this.viewer.getImage().getPrev());
+        this.viewer.getPrevious();
+        this.parent.revalidate();
     }
 
     @Override

@@ -17,8 +17,8 @@ public class NextImageCommand implements Command {
     @Override
     public void execute() {
         this.viewer.getNext();
-        this.parent.repaint();
-        this.parent.setVisible(true);
+        this.parent.revalidate();
+        //this.parent.setVisible(true);
     }
 
     @Override

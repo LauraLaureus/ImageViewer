@@ -63,7 +63,7 @@ public class ImageDaisyChain extends TreeMap<File,ProxyImage> implements Observe
     
     public BufferedImage getPrevious(){
         index--;
-        if(index > 0){
+        if(index >= 0){
             talk();
             return this.daisyChain.get(index).getValue().getImage();
         }else{

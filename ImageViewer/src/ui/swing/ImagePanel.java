@@ -21,11 +21,12 @@ public class ImagePanel extends JPanel implements Observer{
         dc.hook(this);
         JLabel picLabel = new JLabel(new ImageIcon(image));
         add(picLabel);
+       
         this.setMinimumSize(new Dimension(image.getWidth(), image.getHeight()));
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
         Graphics2D g2d = image.createGraphics();
@@ -35,14 +36,21 @@ public class ImagePanel extends JPanel implements Observer{
         g2d.drawLine( 0, image.getHeight()/3,image.getWidth(), image.getHeight()/3);
         g2d.drawLine(0,2*image.getHeight()/3,image.getWidth(),2*image.getHeight()/3);
         g2d.dispose();
-        //g.drawImage(image, 0, 0, null); 
+        
     }
 
     @Override
     public void notice(Observed o) {
         ImageDaisyChain dc = (ImageDaisyChain) o;
         image = dc.getCurrent();
-        remove(0);
+        changeLabel(image);
+        repaint();
+    }
+
+    private void changeLabel(BufferedImage image) {
+        this.removeAll();
+        JLabel picLabel = new JLabel(new ImageIcon(image));
+        add(picLabel);
         
     }
     
