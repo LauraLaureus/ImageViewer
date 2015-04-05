@@ -1,9 +1,11 @@
 package ui.swing;
 
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 import persistence.ImageDaisyChain;
 
 
@@ -21,6 +23,11 @@ public class ApplicationFrame extends JFrame {
     }
 
     private void addWidgets() {
+        
+        addImagePanel();
+    }
+
+    private void addImagePanel() {
         Insets defaultInsets = new Insets(0, 0, 0, 0);
         GridBagConstraints c = new GridBagConstraints(
                 0,
@@ -36,6 +43,6 @@ public class ApplicationFrame extends JFrame {
                 10);
         add(new ImagePanel(this.daisyChain),c);
     }
-    
+
     
 }
