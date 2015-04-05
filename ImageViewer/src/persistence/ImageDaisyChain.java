@@ -11,17 +11,17 @@ import model.Observer;
 import model.ProxyImage;
 
 
-public class ImageDaisyChain extends TreeMap<String,ProxyImage> implements Observed {
+public class ImageDaisyChain extends TreeMap<File,ProxyImage> implements Observed {
 
-    private final ArrayList<Entry<String,ProxyImage>> daisyChain;
+    private final ArrayList<Entry<File,ProxyImage>> daisyChain;
     private Integer index;
     private final ArrayList<Observer> obsevers;
     
     public ImageDaisyChain(File directory) {
                 
-        String[] files = getFilesInDirectory(directory);
-        for (String file : files) {
-            this.put(file, new ProxyImage(directory.getAbsolutePath() + file));
+         ArrayList<File> files = getFilesInDirectory(directory);
+        for (File file : files) {
+            this.put(file, new ProxyImage(file));
         }
         index = 0;
         this.daisyChain = new ArrayList(this.entrySet());
@@ -30,16 +30,16 @@ public class ImageDaisyChain extends TreeMap<String,ProxyImage> implements Obser
 
     
 
-    private String[] getFilesInDirectory(File folder) {
-        ArrayList<String> solution = new ArrayList<>();
+    private ArrayList<File> getFilesInDirectory(File folder) {
+        ArrayList<File> solution = new ArrayList<>();
 
         for (final File fileEntry : folder.listFiles()) {
             if (!fileEntry.isDirectory()) {
                 if(isImageFile(fileEntry.getName()))
-                    solution.add(fileEntry.getName());
+                    solution.add(fileEntry);
             } 
         }
-        return solution.toArray(new String[0]);
+        return solution;
     }
 
     private boolean isImageFile(String name) {
