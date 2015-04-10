@@ -36,4 +36,15 @@ public class BufferedEntry {
     
     public String getAtIndex(int index){
         return this.entry.get(index);    }
+
+    @Override
+    public String toString() {
+        String result = "";
+        for (String field : entry) {
+            result += field + ",";
+        }
+        return result;
+    }
+    
+    
 }

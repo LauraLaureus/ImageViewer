@@ -1,8 +1,9 @@
 package outPersistense;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class BufferedCSVFile implements BufferedFile {
+public class BufferedCSVFile implements BufferedFile, Iterable {
 
     private final int numFields;
     private final ArrayList<BufferedEntry> file;
@@ -40,5 +41,10 @@ public class BufferedCSVFile implements BufferedFile {
 
     private BufferedEntry getEntry(int index) {
         return file.get(index);
+    }
+
+    @Override
+    public Iterator iterator() {
+        return file.iterator();
     }
 }

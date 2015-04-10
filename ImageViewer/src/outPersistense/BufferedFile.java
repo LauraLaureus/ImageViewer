@@ -1,9 +1,9 @@
 package outPersistense;
 
-public interface BufferedFile {
+public interface BufferedFile  {
 
     public void setEntry(BufferedEntry e);
 
-    
+   
     
 }
