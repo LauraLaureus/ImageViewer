@@ -3,6 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Laura/Documents/GitHub/ImageViewer/ImageViewer/src/outPersistense/BufferedFile.java</file>
+            <file>file:/C:/Users/Laura/Documents/GitHub/ImageViewer/ImageViewer/src/outPersistense/BufferedEntry.java</file>
+            <file>file:/C:/Users/Laura/Documents/GitHub/ImageViewer/ImageViewer/src/outPersistense/CVSFileWriter.java</file>
+            <file>file:/C:/Users/Laura/Documents/GitHub/ImageViewer/ImageViewer/src/outPersistense/FileWriter.java</file>
             <file>file:/C:/Users/Laura/Documents/GitHub/ImageViewer/ImageViewer/src/outPersistense/BufferedCSVFile.java</file>
         </group>
     </open-files>

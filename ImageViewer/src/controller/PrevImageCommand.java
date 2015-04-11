@@ -1,15 +1,15 @@
 package controller;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import persistence.ImageDaisyChain;
-import ui.swing.ApplicationFrame;
 
 public class PrevImageCommand implements Command {
 
     private final ImageDaisyChain viewer;
-    private final ApplicationFrame parent;
+    private final Component parent;
     
-    public PrevImageCommand(ImageDaisyChain dc, ApplicationFrame af) {
+    public PrevImageCommand(ImageDaisyChain dc, Component af) {
         this.viewer = dc;
         parent = af;
     }
