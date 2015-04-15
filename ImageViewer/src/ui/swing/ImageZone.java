@@ -1,6 +1,5 @@
 package ui.swing;
 
-import ui.swing.tools.ImagePanel;
 import controller.NextImageCommand;
 import controller.PrevImageCommand;
 import java.awt.Component;
@@ -11,6 +10,7 @@ import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import persistence.ImageDaisyChain;
+import ui.swing.tools.ImageSquare;
 
 public class ImageZone extends JPanel {
 
@@ -48,7 +48,8 @@ public class ImageZone extends JPanel {
                 defaultInsets,
                 10,
                 10);
-        add(new ImagePanel(this.daisyChain,this),c);
+        add(new ImageSquare(this.daisyChain,
+                new Dimension(1200,1200 )),c);
     }
 
     private void addNextButton() {

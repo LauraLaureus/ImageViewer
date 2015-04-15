@@ -2,7 +2,9 @@ package ui.swing;
 
 
 import javax.swing.JFrame;
+import javax.swing.JSplitPane;
 import persistence.ImageDaisyChain;
+import ui.swing.tools.ImagePanel;
 
 
 public class ApplicationFrame extends JFrame {
@@ -11,8 +13,8 @@ public class ApplicationFrame extends JFrame {
     
     public ApplicationFrame(ImageDaisyChain daisyChain){
         this.daisyChain = daisyChain;
-        this.addWidgets();
-        this.pack();
+        configurePanels();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
@@ -24,7 +26,16 @@ public class ApplicationFrame extends JFrame {
     }
 
     private void addImageZone() {
-        this.add(new ImageZone(daisyChain, this));
+        this.add(new ImageZone(daisyChain, this));}
+
+    private void configurePanels() {
+
+        JSplitPane panel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
+                new ImagePanel(daisyChain, this),
+                new ImageZone(daisyChain, this));
+        panel.setDividerLocation(250);
+        this.setContentPane(panel);
+        
     }
 
     

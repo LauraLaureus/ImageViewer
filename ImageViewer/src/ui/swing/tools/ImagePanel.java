@@ -7,8 +7,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -25,7 +23,7 @@ public class ImagePanel extends JPanel implements Observer {
 
     public ImagePanel(ImageDaisyChain dc, Component parent) {
         this.parent = parent;
-        addComponentListener();
+        addListeners();
 
         image = dc.getCurrent();
         dc.hook(this);
@@ -34,14 +32,29 @@ public class ImagePanel extends JPanel implements Observer {
         createImageRules();
 
         setThisComponentRules();
-       
 
     }
 
+    private void addListeners() {
+        addComponentListener();
+        //addMouseListener();
+    }
+
+    private void setThisComponentRules() {
+        this.setSize(new Dimension(parent.getWidth(), parent.getHeight()));
+        this.setMaximumSize(new Dimension(parent.getWidth(), parent.getHeight()));
+    }
+
+    private void refresh() {
+        this.removeAll();
+        JLabel picLabel = new JLabel(new ImageIcon(this.image));
+        picLabel.setSize(this.getSize());
+        add(picLabel);
+    }
+    
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         drawRules(image).dispose();
 
     }
@@ -54,11 +67,7 @@ public class ImagePanel extends JPanel implements Observer {
         repaint();
     }
 
-    private void refresh() {
-        this.removeAll();
-        JLabel picLabel = new JLabel(new ImageIcon(this.image));
-        add(picLabel);
-    }
+    
 
     private void addComponentListener() {
         parent.addComponentListener(new ComponentListener() {
@@ -70,10 +79,12 @@ public class ImagePanel extends JPanel implements Observer {
 
             @Override
             public void componentMoved(ComponentEvent e) {
+                repaint();
             }
 
             @Override
             public void componentShown(ComponentEvent e) {
+                repaint();
             }
 
             @Override
@@ -82,19 +93,7 @@ public class ImagePanel extends JPanel implements Observer {
         });
     }
 
-    private void getScaled() {
-        int w = this.image.getWidth();
-        int h = this.image.getHeight();
-
-        BufferedImage result = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-        AffineTransform at = new AffineTransform();
-        float scaleW = (float) w / this.getWidth();
-        float scaleH = (float) h / this.getHeight();
-        at.scale(scaleW, scaleH);
-        AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-        this.image = op.filter(image, result);
-
-    }
+    
 
     private void createImageRules() {
         this.rules = new ImageRuleContainer();
@@ -110,6 +109,8 @@ public class ImagePanel extends JPanel implements Observer {
                 return g2d;
             }
         });
+
+        
     }
 
     private Graphics2D drawRules(BufferedImage img) {
@@ -122,9 +123,5 @@ public class ImagePanel extends JPanel implements Observer {
         return g2d;
     }
 
-    private void setThisComponentRules() {
-         this.setSize(new Dimension(parent.getWidth(), parent.getHeight()));
-         this.setMaximumSize(new Dimension(parent.getWidth(), parent.getHeight()));
-    }
-
+    
 }
