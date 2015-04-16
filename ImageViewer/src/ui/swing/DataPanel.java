@@ -1,5 +1,6 @@
 package ui.swing;
 
+import controller.EntryCommand;
 import controller.NextImageCommand;
 import controller.PrevImageCommand;
 import java.awt.Component;
@@ -28,12 +29,13 @@ public class DataPanel extends javax.swing.JPanel implements Observer {
         text = new javax.swing.JLabel();
         cuadrant = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        entryDisplayer = new javax.swing.JList();
         jLabel1 = new javax.swing.JLabel();
         anterior = new javax.swing.JButton();
         siguiente = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        Confirmar = new javax.swing.JButton();
+        sexo = new javax.swing.JComboBox();
 
         ImageTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ImageTitle.setText("Titulo");
@@ -43,7 +45,7 @@ public class DataPanel extends javax.swing.JPanel implements Observer {
 
         cuadrant.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13" }));
 
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(entryDisplayer);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Entradas en espera de ser guardadas ");
@@ -64,17 +66,26 @@ public class DataPanel extends javax.swing.JPanel implements Observer {
 
         jButton3.setText("Guardar");
 
-        jButton1.setText("Confirmar");
+        Confirmar.setText("Confirmar");
+        Confirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmarActionPerformed(evt);
+            }
+        });
+
+        sexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mujer", "Hombre" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(121, 121, 121)
+                .addContainerGap(49, Short.MAX_VALUE)
+                .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cuadrant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(Confirmar)
                 .addGap(180, 180, 180))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -109,7 +120,8 @@ public class DataPanel extends javax.swing.JPanel implements Observer {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cuadrant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(Confirmar)
+                    .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -128,16 +140,26 @@ public class DataPanel extends javax.swing.JPanel implements Observer {
         new NextImageCommand(dc, parent).actionPerformed(evt);
     }//GEN-LAST:event_siguienteActionPerformed
 
+    private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
+        String fileName = ImageTitle.getName();
+        String sexo =(String) this.sexo.getSelectedItem();
+        String number =(String) this.cuadrant.getSelectedItem();
+        
+        new EntryCommand(fileName, sexo, fileName).actionPerformed(evt);
+        
+    }//GEN-LAST:event_ConfirmarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Confirmar;
     private javax.swing.JLabel ImageTitle;
     private javax.swing.JButton anterior;
     private javax.swing.JComboBox cuadrant;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JList entryDisplayer;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox sexo;
     private javax.swing.JButton siguiente;
     private javax.swing.JLabel text;
     // End of variables declaration//GEN-END:variables

@@ -33,13 +33,13 @@ public class BufferedCSVFile implements BufferedFile, Iterable {
 
     public void modifyEntry(int index, BufferedEntry buff) {
         BufferedEntry asked = getEntry(index);
-        
+
         for (int i = 0; i < buff.size(); i++) {
             asked.modifyAtIndex(i, buff.getAtIndex(i));
         }
     }
 
-    private BufferedEntry getEntry(int index) {
+    public BufferedEntry getEntry(int index) {
         return file.get(index);
     }
 
@@ -47,4 +47,5 @@ public class BufferedCSVFile implements BufferedFile, Iterable {
     public Iterator iterator() {
         return file.iterator();
     }
+
 }
