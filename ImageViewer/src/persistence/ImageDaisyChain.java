@@ -87,4 +87,8 @@ public class ImageDaisyChain extends TreeMap<File,ProxyImage> implements Observe
             obsever.notice(this);
         }
     }
+    
+    public String getCurrentTitle(){
+        return this.daisyChain.get(index).getValue().getTitle();
+    }
 }

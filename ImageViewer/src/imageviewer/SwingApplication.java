@@ -11,7 +11,7 @@ public class SwingApplication {
     public static void main(String[] args) {
         ImageDaisyChain daisyChain = new ImageDaisyChain(
                new DirectoryFileChooser().getElementIfItIsSuitable(new JFrame()));
-        //new ApplicationFrame(daisyChain);
+        new ApplicationFrame(daisyChain);
        
     }
    

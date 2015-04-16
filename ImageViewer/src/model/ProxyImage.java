@@ -3,7 +3,6 @@ package model;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -30,5 +29,9 @@ public class ProxyImage
             }
         }
         return this.img;
+    }
+    
+    public String getTitle(){
+        return this.file.getName();
     }
 }

@@ -13,6 +13,7 @@ public class ApplicationFrame extends JFrame {
     public ApplicationFrame(ImageDaisyChain daisyChain){
         this.daisyChain = daisyChain;
         configurePanels();
+        this.setTitle("ImageViewer - Extended!!!");
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
@@ -25,7 +26,7 @@ public class ApplicationFrame extends JFrame {
 
         JSplitPane panel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
                 new ImageDisplayer(daisyChain),
-                new DataPanel());
+                new DataPanel(daisyChain,this));
         panel.setDividerLocation(700);
         this.setContentPane(panel);
         
