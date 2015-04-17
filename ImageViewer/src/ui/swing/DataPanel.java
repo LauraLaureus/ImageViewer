@@ -3,6 +3,7 @@ package ui.swing;
 import controller.EntryCommand;
 import controller.NextImageCommand;
 import controller.PrevImageCommand;
+import controller.SaveCommand;
 import java.awt.Component;
 import model.Observed;
 import model.Observer;
@@ -66,6 +67,11 @@ public class DataPanel extends javax.swing.JPanel implements Observer {
         });
 
         jButton3.setText("Guardar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         Confirmar.setText("Confirmar");
         Confirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -149,6 +155,10 @@ public class DataPanel extends javax.swing.JPanel implements Observer {
         new EntryCommand(fileName, sexo, number).actionPerformed(evt);
         refreshList();
     }//GEN-LAST:event_ConfirmarActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        new SaveCommand().execute();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

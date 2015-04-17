@@ -13,10 +13,8 @@ public class CVSFileWriter implements FileWriter{
         PrintWriter writer = null;
         try {
             writer = new PrintWriter("out.csv", "UTF-8");
-            
-            
             for (Object entry : buff) {
-                writer.print(entry);
+                writer.println(entry);
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(CVSFileWriter.class.getName()).log(Level.SEVERE, null, ex);
