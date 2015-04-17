@@ -2,5 +2,5 @@ package outPersistense;
 
 public interface FileWriter {
 
-    public void writeToFile( BufferedFile buff, String name);
+    public void writeToFile(Object[] buff, String name);
 }

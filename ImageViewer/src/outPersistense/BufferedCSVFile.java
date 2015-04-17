@@ -1,22 +1,15 @@
 package outPersistense;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
-public class BufferedCSVFile implements BufferedFile, Iterable {
+public class BufferedCSVFile  {
 
-    private final int numFields;
-    private final ArrayList<BufferedEntry> file;
-    private int index;
+    private static final int numFields = 3;
+    private static final ArrayList<BufferedEntry> file= new ArrayList<>();
+    private static int index = 0;
 
-    public BufferedCSVFile(int numFields) {
-        this.numFields = numFields;
-        this.file = new ArrayList<>();
-        index = 0;
-    }
 
-    @Override
-    public void setEntry(BufferedEntry e) {
+    public static void setEntry(BufferedEntry e) {
         BufferedEntry entry = new BufferedEntry();
         if (e.size() > numFields) {
             int i = 0;
@@ -28,10 +21,9 @@ public class BufferedCSVFile implements BufferedFile, Iterable {
             entry = e;
         }
         file.add(entry);
-        index++;
     }
 
-    public void modifyEntry(int index, BufferedEntry buff) {
+    public static void modifyEntry(int index, BufferedEntry buff) {
         BufferedEntry asked = getEntry(index);
 
         for (int i = 0; i < buff.size(); i++) {
@@ -39,13 +31,31 @@ public class BufferedCSVFile implements BufferedFile, Iterable {
         }
     }
 
-    public BufferedEntry getEntry(int index) {
+    public static BufferedEntry getEntry(int index) {
         return file.get(index);
     }
 
-    @Override
-    public Iterator iterator() {
-        return file.iterator();
+    public static boolean lastEntryIsDiferentThanCurrent(BufferedEntry createEntry) {
+        if(index-1 < 0 || index > file.size()) return true;
+        BufferedEntry previous = getEntry(index-1);
+        return previous.getAtIndex(0).equalsIgnoreCase(createEntry.getAtIndex(0));
     }
 
+    
+
+    public static Object[] getList(){
+        return file.toArray();
+    }
+    
+    public static void increaseIndex(){
+        index++;
+    }
+    
+    public static void decreaseIndex(){
+        index--;
+    }
+    
+    public static int getCurrentIndex(){
+        return index;
+    }
 }

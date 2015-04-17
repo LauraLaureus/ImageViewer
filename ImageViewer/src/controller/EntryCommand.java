@@ -6,18 +6,16 @@ import outPersistense.BufferedEntry;
 
 public class EntryCommand implements Command {
 
-    private String nombre;
-    private String sexo;
-    private String cuadrante;
-    private static final BufferedCSVFile bufferedFile = new BufferedCSVFile(3);
-    
-    public EntryCommand(String fileName,String sexo, String cuadrante) {
+    private final String nombre;
+    private final String sexo;
+    private final String cuadrante;
+
+    public EntryCommand(String fileName, String sexo, String cuadrante) {
         this.sexo = sexo;
         this.cuadrante = cuadrante;
         this.nombre = fileName;
     }
-    
-    
+
     @Override
     public void execute() {
         addEntryToBuffer(createEntry());
@@ -27,9 +25,9 @@ public class EntryCommand implements Command {
     public void actionPerformed(ActionEvent e) {
         execute();
     }
-    
-    private BufferedEntry createEntry(){
-        BufferedEntry record =  new BufferedEntry();
+
+    private BufferedEntry createEntry() {
+        BufferedEntry record = new BufferedEntry();
         record.append(nombre);
         record.append(sexo);
         record.append(cuadrante);
@@ -37,6 +35,10 @@ public class EntryCommand implements Command {
     }
 
     private void addEntryToBuffer(BufferedEntry createEntry) {
-        this.bufferedFile.setEntry(createEntry);
+        if (BufferedCSVFile.lastEntryIsDiferentThanCurrent(createEntry)) {
+            BufferedCSVFile.setEntry(createEntry);
+        }else{
+            BufferedCSVFile.modifyEntry(BufferedCSVFile.getCurrentIndex(), createEntry);
+        }
     }
 }

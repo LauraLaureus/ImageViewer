@@ -1,6 +1,7 @@
 package outPersistense;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class BufferedEntry {
 
@@ -22,7 +23,7 @@ public class BufferedEntry {
     }
     
     public int size(){
-        return this.size();
+        return this.entry.size();
     }
     
     public ArrayList<String> getRecord(){
@@ -44,6 +45,27 @@ public class BufferedEntry {
             result += field + ",";
         }
         return result;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final BufferedEntry other = (BufferedEntry) obj;
+        if (!Objects.equals(this.entry, other.entry)) {
+            return false;
+        }
+        return true;
     }
     
     

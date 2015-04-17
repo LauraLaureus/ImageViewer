@@ -6,6 +6,7 @@ import controller.PrevImageCommand;
 import java.awt.Component;
 import model.Observed;
 import model.Observer;
+import outPersistense.BufferedCSVFile;
 import persistence.ImageDaisyChain;
 
 public class DataPanel extends javax.swing.JPanel implements Observer {
@@ -141,12 +142,12 @@ public class DataPanel extends javax.swing.JPanel implements Observer {
     }//GEN-LAST:event_siguienteActionPerformed
 
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
-        String fileName = ImageTitle.getName();
+        String fileName = ImageTitle.getText();
         String sexo =(String) this.sexo.getSelectedItem();
         String number =(String) this.cuadrant.getSelectedItem();
         
-        new EntryCommand(fileName, sexo, fileName).actionPerformed(evt);
-        
+        new EntryCommand(fileName, sexo, number).actionPerformed(evt);
+        refreshList();
     }//GEN-LAST:event_ConfirmarActionPerformed
 
 
@@ -173,5 +174,9 @@ public class DataPanel extends javax.swing.JPanel implements Observer {
     @Override
     public void notice(Observed o) {
         setImageTitle();
+    }
+    
+    private void refreshList(){
+        this.entryDisplayer.setListData(BufferedCSVFile.getList());
     }
 }

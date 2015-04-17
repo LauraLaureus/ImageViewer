@@ -9,13 +9,13 @@ import java.util.logging.Logger;
 public class CVSFileWriter implements FileWriter{
 
     @Override
-    public void writeToFile(BufferedFile buff, String name) {
+    public void writeToFile(Object[] buff, String name) {
         PrintWriter writer = null;
         try {
             writer = new PrintWriter("out.csv", "UTF-8");
             
-            Iterable<BufferedEntry> iterableBuffer = (Iterable) buff;
-            for (BufferedEntry entry : iterableBuffer) {
+            
+            for (Object entry : buff) {
                 writer.print(entry);
             }
         } catch (FileNotFoundException ex) {

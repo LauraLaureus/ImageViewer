@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import outPersistense.BufferedCSVFile;
 import persistence.ImageDaisyChain;
 
 public class NextImageCommand implements Command {
@@ -17,6 +18,7 @@ public class NextImageCommand implements Command {
     @Override
     public void execute() {
         this.viewer.getNext();
+        BufferedCSVFile.increaseIndex();
         this.parent.revalidate();
     }
 
