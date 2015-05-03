@@ -8,7 +8,7 @@ import java.awt.Component;
 import model.Observed;
 import model.Observer;
 import outPersistense.BufferedCSVFile;
-import persistence.ImageDaisyChain;
+import inPersistence.ImageDaisyChain;
 
 public class DataPanel extends javax.swing.JPanel implements Observer {
 

@@ -1,4 +1,4 @@
-package persistence;
+package inPersistence;
 
 
 import java.awt.image.BufferedImage;

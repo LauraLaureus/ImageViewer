@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import model.Observed;
 import model.Observer;
-import persistence.ImageDaisyChain;
+import inPersistence.ImageDaisyChain;
 
 public class ImageDisplayer extends javax.swing.JPanel implements Observer {
 

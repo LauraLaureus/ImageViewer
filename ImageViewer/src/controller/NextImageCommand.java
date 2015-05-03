@@ -3,7 +3,7 @@ package controller;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import outPersistense.BufferedCSVFile;
-import persistence.ImageDaisyChain;
+import inPersistence.ImageDaisyChain;
 
 public class NextImageCommand implements Command {
 

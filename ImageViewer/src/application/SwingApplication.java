@@ -1,8 +1,8 @@
-package imageviewer;
+package application;
 
 import javax.swing.JFrame;
-import persistence.DirectoryFileChooser;
-import persistence.ImageDaisyChain;
+import inPersistence.DirectoryFileChooser;
+import inPersistence.ImageDaisyChain;
 import ui.swing.ApplicationFrame;
 
 public class SwingApplication {

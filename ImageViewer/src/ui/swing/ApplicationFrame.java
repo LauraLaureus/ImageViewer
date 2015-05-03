@@ -3,7 +3,7 @@ package ui.swing;
 
 import javax.swing.JFrame;
 import javax.swing.JSplitPane;
-import persistence.ImageDaisyChain;
+import inPersistence.ImageDaisyChain;
 
 
 public class ApplicationFrame extends JFrame {
