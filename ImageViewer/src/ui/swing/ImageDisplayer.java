@@ -1,5 +1,6 @@
 package ui.swing;
 
+import imageProcessing.ImageProcesser;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -11,15 +12,15 @@ public class ImageDisplayer extends javax.swing.JPanel implements Observer {
 
     private final ImageDaisyChain daisychain;
     private BufferedImage image;
-    
-    public ImageDisplayer( ImageDaisyChain dc) {
+    private boolean imageProcesser_mode = false;
+
+    public ImageDisplayer(ImageDaisyChain dc) {
         this.daisychain = dc;
         this.daisychain.hook(this);
         this.image = daisychain.getCurrent();
         initComponents();
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -39,7 +40,6 @@ public class ImageDisplayer extends javax.swing.JPanel implements Observer {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
     @Override
     public void notice(Observed o) {
         refreshImage();
@@ -52,14 +52,15 @@ public class ImageDisplayer extends javax.swing.JPanel implements Observer {
 
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g); 
-        g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), this);
-        g.setColor(Color.red);
-        g.drawLine(this.getWidth()/3, 0, this.getWidth()/3, this.getHeight());
-        g.drawLine(2*this.getWidth()/3, 0, 2*this.getWidth()/3, this.getHeight());
-        g.drawLine(0, this.getHeight()/3, this.getWidth(), this.getHeight()/3);
-        g.drawLine(0, 2*this.getHeight()/3, this.getWidth(), 2*this.getHeight()/3);
+        super.paintComponent(g);
+        g.drawImage(ImageProcesser.toBorderImage(image), 0, 0, this.getWidth(), this.getHeight(), this);
+        if (!imageProcesser_mode) {
+            g.setColor(Color.red);
+            g.drawLine(this.getWidth() / 3, 0, this.getWidth() / 3, this.getHeight());
+            g.drawLine(2 * this.getWidth() / 3, 0, 2 * this.getWidth() / 3, this.getHeight());
+            g.drawLine(0, this.getHeight() / 3, this.getWidth(), this.getHeight() / 3);
+            g.drawLine(0, 2 * this.getHeight() / 3, this.getWidth(), 2 * this.getHeight() / 3);
+        }
     }
-    
-    
+
 }
